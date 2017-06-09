@@ -6,7 +6,7 @@ import pygame
 class Sticks(object):
     def __init__(self):
         self._stick_list = []
-        self._biggest = 0
+        self._biggest = 0  # REVIEW: Biggest niteliği burada mı gerekli yoksa alt sınıfında mı?
 
     @property
     def biggest(self):
@@ -25,7 +25,8 @@ class Sticks(object):
 
         self.sticks.append(new_stick)
 
-        color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+        # color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+        color = (15, 156, 15)
         new_stick.color = color
 
         if new_stick.length > self._biggest:
@@ -39,7 +40,6 @@ class Sticks(object):
             i += 1
 
     def find_stick(self, length: int, start: int) -> stick:
-
         """
         for stick_i in self.sticks:
             if stick_i.length == length:
@@ -47,7 +47,7 @@ class Sticks(object):
 
         """
 
-        if start > len(self.sticks):  #TODO : Hata döndürülmeli
+        if start > len(self.sticks):  # TODO : Hata döndürülmeli
             print("Hata")
             return -1
 
@@ -58,17 +58,32 @@ class Sticks(object):
                 return self.sticks[i]
             i += 1
 
-        return -1
+        print("Bulamadı")
+        return -1  # self.sticks[start]
 
     @staticmethod
     def swap_stick_locations(stick_1: stick, stick_2: stick) -> None:
+        """
+        This is a static method which swaps stick locations.
 
+        We need this method because we need the control on sorting, when
+        we show the sorting steps on screen.
+        """
+
+        """
         temp_location = stick_1.location
         stick_1.location = stick_2.location
         stick_2.location = temp_location
+        # Classic swap algorithm
+        """
+        temp_location = stick_1.length  # REVIEW : Location değiştirerek hesaplamayı dene. Bunun olması şaşırtıcı
+        stick_1.length = stick_2.length
+        stick_2.length = temp_location
+        # Classic swap algorithm
 
 
-class SticksToGui:  # SOR: İşler için statik metod mu yoksa iş nesnesi mi daha uygundur?
+
+class SticksToGui(Sticks):  # IDEA: İşler için statik metod mu yoksa iş nesnesi mi daha uygundur?
     """
     This is a working class, that draws sticks to windows (game board) which you give to
     itself as a parameter.
@@ -77,8 +92,8 @@ class SticksToGui:  # SOR: İşler için statik metod mu yoksa iş nesnesi mi da
     lengths.
     """
 
-    def __init__(self, sticks_o: Sticks, board: pygame.display, win_sizes: tuple) -> None:
-        self.sticks_object = sticks_o
+    def __init__(self, board: pygame.display, win_sizes: tuple) -> None:
+        super().__init__()
         self.game_board = board
         self.window_sizes = win_sizes
 
@@ -93,8 +108,8 @@ class SticksToGui:  # SOR: İşler için statik metod mu yoksa iş nesnesi mi da
         height = self.window_sizes[1]
         length = self.window_sizes[0]
 
-        vertical_scale = (length / self.sticks_object.nos)
-        horizontal_scale = int(height / self.sticks_object.biggest)
+        vertical_scale = (length / self.nos)
+        horizontal_scale = int(height / self.biggest)
 
         scales = (vertical_scale, horizontal_scale)
 
@@ -112,7 +127,7 @@ class SticksToGui:  # SOR: İşler için statik metod mu yoksa iş nesnesi mi da
 
         win_height = self.window_sizes[1]
 
-        for s in self.sticks_object.sticks:
+        for s in self.sticks:
             len_y = s.length * scales[1]
             len_x = scales[0]
             pos_y = win_height - len_y

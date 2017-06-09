@@ -12,8 +12,8 @@ class SelectionSorted(SortedList):
 
         while i < length:
             s_index = self.smallest(i, length)
-            temp = self._list[i]
 
+            temp = self._list[i]
             self._list[i] = self._list[s_index]
             self._list[s_index] = temp
 
