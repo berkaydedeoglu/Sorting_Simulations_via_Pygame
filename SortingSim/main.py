@@ -14,8 +14,8 @@ scales = sticks.generate_scale()
 sorted_sticks = SortSticks.SortSticks(sticks)
 game_exit = 0
 start = time.time()
-test = Thread(target = sorted_sticks.test_sort)
-test.start()
+sort = Thread(target = sorted_sticks.selection_sort)
+sort.start()
 
 while not game_exit:
     stop = time.time()

@@ -4,10 +4,10 @@ import time
 
 
 class SortSticks(object):
-    def __init__(self, sticks: Sticks):
+    def __init__(self, sticks_object: Sticks):
 
-        self.sticks = sticks
-        self._length_list = [sticks.length for sticks in self.sticks.sticks]
+        self.sticks = sticks_object
+        self._length_list = [stick.length for stick in self.sticks.sticks]
 
     @property
     def length_list(self) -> list:
@@ -19,9 +19,8 @@ class SortSticks(object):
         stick_1 = self.sticks.find_stick(self.length_list[index_1], in_from)
         stick_2 = self.sticks.find_stick(self.length_list[index_2], in_from)
         self.sticks_on((stick_1, stick_2))
-        time.sleep(0.05)
+        time.sleep(0.1)
         self.sticks.swap_stick_locations(stick_1, stick_2)
-        time.sleep(0.05)
         self.sticks_off((stick_1, stick_2))
 
         # Swapping list items
@@ -45,9 +44,33 @@ class SortSticks(object):
             self.swap(i, i+1, 0)
             i += 1
 
+    def selection_sort(self):
+        len_list = len(self.length_list)
+
+        def smallest(step: int) -> int:
+            temp = self.length_list[step]
+            i = step
+            index = i
+
+            while i < len_list:
+                if self.length_list[i] < temp:
+                    temp = self.length_list[i]
+                    index = i
+                i += 1
+
+            return index
+
+        def sort():
+            i = 0
+            while i < len_list:
+                small = smallest(i)
+                self.swap(i, small, i)
+                i += 1
+
+        sort()
 
 if __name__ == "__main__":
-    stcks = Sticks.Sticks()
-    stcks.new_sticks(10)
-    ex = SortSticks(stcks)
+    sticks = Sticks.Sticks()
+    sticks.new_sticks(10)
+    ex = SortSticks(sticks)
     print(ex.length_list)
