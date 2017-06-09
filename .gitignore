@@ -1,5 +1,4 @@
-./Test
-
-./idea
-
-./SortingSim/__pycache__
+/Test
+/.idea
+/SortingSim/__pycache__
+/SortedList/__pycache__

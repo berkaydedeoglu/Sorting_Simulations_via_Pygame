@@ -1,5 +1,5 @@
 import pygame as pg
-from SortingSim import Sticks, SortSticks
+import Sticks, SortSticks
 import time
 from threading import Thread
 

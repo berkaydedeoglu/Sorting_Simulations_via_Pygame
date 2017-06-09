@@ -1,4 +1,4 @@
-from SortingSim import Sticks
+import Sticks
 # from SortingSim import stick
 import time
 
@@ -19,7 +19,7 @@ class SortSticks(object):
         stick_1 = self.sticks.find_stick(self.length_list[index_1], in_from)
         stick_2 = self.sticks.find_stick(self.length_list[index_2], in_from)
         self.sticks_on((stick_1, stick_2))
-        time.sleep(0.1)
+        time.sleep(0.08)
         self.sticks.swap_stick_locations(stick_1, stick_2)
         self.sticks_off((stick_1, stick_2))
 

@@ -1,5 +1,5 @@
-from SortingSim import Sticks
-from SortingSim import stick
+import Sticks
+import stick
 import time
 
 """

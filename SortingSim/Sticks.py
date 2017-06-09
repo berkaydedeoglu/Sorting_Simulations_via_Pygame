@@ -1,5 +1,5 @@
 import random
-from SortingSim import stick
+import stick
 import pygame
 
 
