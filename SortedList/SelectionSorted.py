@@ -3,10 +3,8 @@ from SortedList import SortedList
 
 class SelectionSorted(SortedList):
 
-    """
     def __init__(self, arg: list or tuple) -> None:
         super().__init__(arg)
-    """
 
     def sort(self): # Todo: Check steps via print()
         i = 0

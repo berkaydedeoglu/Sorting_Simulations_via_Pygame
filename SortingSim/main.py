@@ -1,24 +1,32 @@
 import pygame as pg
 from SortingSim import Sticks
 
+
+
 sticks = Sticks.Sticks()
-sticks.new_sticks(50)
+sticks.new_sticks(100)
+
+#ex2 = SortSticks.SortSticks(sticks)
+#ex2.sort()
+
 pg.init()
 clock = pg.time.Clock()
 
-board = pg.display.set_mode([700, 550], pg.HWSURFACE | pg.SWSURFACE)
-Gsticks = Sticks.SticksToGui(sticks, board, (700, 550))
+board = pg.display.set_mode([900, 550], pg.HWSURFACE | pg.SWSURFACE)
+Gsticks = Sticks.SticksToGui(sticks, board, (900, 550))
 scales = Gsticks.generate_scale()
 game_exit = 0
+
 while not game_exit:
+
     for e in pg.event.get():
         if e.type == pg.QUIT:
-            exit_game = 1
+            game_exit = 1
 
-    board.fill((32, 32, 32))
+    board.fill((30, 32, 35))
     Gsticks.draw_sticks(scales)
     pg.display.update()
-    clock.tick(25)
+    clock.tick(14)
 
 
 pg.quit()

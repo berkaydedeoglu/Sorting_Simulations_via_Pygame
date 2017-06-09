@@ -3,6 +3,9 @@ from SortedList import SortedList
 
 class BubbleSorted(SortedList):
 
+    def __init__(self, arg):
+        super().__init__(self, arg)
+
     def sort(self) -> None:
 
         li = self._list
