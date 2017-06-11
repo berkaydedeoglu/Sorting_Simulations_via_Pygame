@@ -1,9 +1,18 @@
 import Sticks
 import stick
 import time
+import pygame
+
+pygame.init()
+board = pygame.display.set_mode((400, 400))
+
+while 1:
+    for e in pygame.event.get():
+        if e.type == pygame.KEYDOWN and e.key == pygame.K_TAB:
+            print("pressed tab")
 
 """
-    # ///---=== FIND  STICK TEST ===---
+# ///---=== FIND  STICK TEST ===---
 
 ex1 = Sticks.Sticks()
 ex1.new_sticks(10)
@@ -12,7 +21,7 @@ print(a)
 print([ex1.find_stick(i, 0).location for i in a])
 print([ex1.find_stick(i, 0).location for i in a])
 
-    # ///---=== FIND  STICK TEST ===---
+# ///---=== FIND  STICK TEST ===---
 """
 
 """

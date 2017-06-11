@@ -1,5 +1,4 @@
 import Sticks
-# from SortingSim import stick
 import time
 
 
@@ -8,12 +7,18 @@ class SortSticks(object):
 
         self.sticks = sticks_object
         self._length_list = [stick.length for stick in self.sticks.sticks]
+        self._swap_time = 0
 
     @property
     def length_list(self) -> list:
         return self._length_list
 
-    def swap(self, index_1: int, index_2: int, in_from: int) -> None:  # FIXME: in_from parametresini işlevli olarak kullandığımda hata alıyorum.
+    @property
+    def swap_time(self) -> int:
+        return self._swap_time
+
+    def swap(self, index_1: int, index_2: int,
+             in_from: int) -> None:  # FIXME: in_from parametresini işlevli olarak kullandığımda hata alıyorum.
 
         # Swapping stick locations!!
         stick_1 = self.sticks.find_stick(self.length_list[index_1], in_from)
@@ -28,6 +33,8 @@ class SortSticks(object):
         self.length_list[index_1] = self.length_list[index_2]
         self.length_list[index_2] = temp
 
+        self._swap_time += 1
+
     @staticmethod
     def sticks_on(stick: tuple) -> None:
         stick[0].color = (255, 0, 255)  # TODO: Renkleri düzelt
@@ -38,10 +45,16 @@ class SortSticks(object):
         stick[0].color = (15, 156, 15)
         stick[1].color = (15, 156, 15)
 
+    def sort(self, algorithm: str = "test"):
+        algorithms = {"test": self.test_sort,
+                      "selection_sort": self.selection_sort}
+
+        algorithms[algorithm]()
+
     def test_sort(self):
         i = 0
-        while i < len(self.length_list)-1:
-            self.swap(i, i+1, 0)
+        while i < len(self.length_list) - 1:
+            self.swap(i, i + 1, 0)
             i += 1
 
     def selection_sort(self):
@@ -68,6 +81,7 @@ class SortSticks(object):
                 i += 1
 
         sort()
+
 
 if __name__ == "__main__":
     sticks = Sticks.Sticks()
