@@ -10,7 +10,7 @@ class SettingWindow(tk.Tk):
         self.resizable(False, False)
         self.title("Settings")
 
-        self.settings = []
+        self.setting_list = list()
 
         self.add_widgets()
 
@@ -18,20 +18,22 @@ class SettingWindow(tk.Tk):
 
     @property
     def settings(self):
-        return self.settings
+        return self.setting_list
 
     def add_widgets(self):
 
         def get_settings():
-            self.settings = []
-            self.settings.append(number_of_sticks.get())
-            self.settings.append(algorithms.get())
-            self.settings.append(speed.get())
-            self.settings.append(variable.get())
+            alg_dict = {"Test Algorithm": "test",
+                        "Selection Sort": "selection_sort"}
+            self.setting_list = []
+            self.setting_list.append(int(number_of_sticks.get()))
+            self.setting_list.append(alg_dict[algorithms.get()])
+            self.setting_list.append(int(speed.get()))
+            self.setting_list.append(variable.get())
 
             self.quit()
 
-            print(self.settings)
+            print(self.setting_list)
 
         tk.Label(self, text="Number of Sticks:", font="Helvatica").grid(row=0, column=0, sticky="w", padx=10, pady=10)
         tk.Label(self, text="Algorithm:", font="Helvatica").grid(row=1, column=0, sticky="w", padx=10, pady=10)

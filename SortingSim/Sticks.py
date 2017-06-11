@@ -20,8 +20,11 @@ class Sticks(object):
     def nos(self):
         return len(self.sticks)
 
-    def new_stick(self) -> None:
-        new_stick = stick.Stick(random.randint(1, 500), self.nos)  # IDEA:  nos id olarak kullanılabilir mi?
+    def new_stick(self, length=0) -> None:
+        if length == 0:
+            new_stick = stick.Stick(random.randint(1, 500), self.nos)  # IDEA:  nos id olarak kullanılabilir mi?
+        else:
+            new_stick = stick.Stick(length, self.nos)
 
         self.sticks.append(new_stick)
 
@@ -32,12 +35,19 @@ class Sticks(object):
         if new_stick.length > self._biggest:
             self._biggest = new_stick.length
 
-    def new_sticks(self, stick_number: int) -> None:
+    def new_sticks(self, stick_number: int, scenerio="random") -> None:
         i = 0
+        if scenerio == "random":
+            while i < stick_number:
+                self.new_stick()
+                i += 1
+        elif scenerio == "best":
+            for i in range(1, stick_number+1):
+                self.new_stick(i)
 
-        while i < stick_number:
-            self.new_stick()
-            i += 1
+        elif scenerio == "worst":
+            for i in range(1, stick_number+1):
+                self.new_stick(stick_number-i+1)
 
     def find_stick(self, length: int, start: int) -> stick:
         """
@@ -80,7 +90,6 @@ class Sticks(object):
         stick_1.length = stick_2.length
         stick_2.length = temp_location
         # Classic swap algorithm
-
 
 
 class SticksToGui(Sticks):  # IDEA: İşler için statik metod mu yoksa iş nesnesi mi daha uygundur?

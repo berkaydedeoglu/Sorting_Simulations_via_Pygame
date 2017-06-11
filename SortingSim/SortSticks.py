@@ -8,6 +8,14 @@ class SortSticks(object):
         self.sticks = sticks_object
         self._length_list = [stick.length for stick in self.sticks.sticks]
         self._swap_time = 0
+        self._speed = None
+
+    @property
+    def speed(self):
+        if 0 < self._speed < 10:
+            return self._speed
+        else:
+            return 1
 
     @property
     def length_list(self) -> list:
@@ -17,6 +25,13 @@ class SortSticks(object):
     def swap_time(self) -> int:
         return self._swap_time
 
+    @speed.setter
+    def speed(self, value):
+        if 0 < value < 10:
+            self._speed = value
+        else:
+            self._speed = 5
+
     def swap(self, index_1: int, index_2: int,
              in_from: int) -> None:  # FIXME: in_from parametresini işlevli olarak kullandığımda hata alıyorum.
 
@@ -24,7 +39,7 @@ class SortSticks(object):
         stick_1 = self.sticks.find_stick(self.length_list[index_1], in_from)
         stick_2 = self.sticks.find_stick(self.length_list[index_2], in_from)
         self.sticks_on((stick_1, stick_2))
-        time.sleep(0.08)
+        time.sleep(1/(self.speed*2.3))  # Hız kontrolü buradan yapılabilir !
         self.sticks.swap_stick_locations(stick_1, stick_2)
         self.sticks_off((stick_1, stick_2))
 

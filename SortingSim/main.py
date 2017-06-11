@@ -1,28 +1,30 @@
 import pygame as pg
-import Sticks, SortSticks
+import Sticks, SortSticks, SettingWindow
 import time
 from threading import Thread
 
+setting_window = SettingWindow.SettingWindow()
+settings = setting_window.settings
 pg.init()
 clock = pg.time.Clock()
 
 board = pg.display.set_mode([900, 550], pg.HWSURFACE | pg.SWSURFACE)
 
 font = pg.font.Font(None, 18)
-status = font.render("Algorithm: Selection Sort, Time: , Speed: ", False ,(156, 20, 180))
+status = font.render("Algorithm: Selection Sort, Time: , Speed: ", False, (156, 20, 180))
 sticks = Sticks.SticksToGui(board, (900, 550))
-sticks.new_sticks(100)
+sticks.new_sticks(settings[0], settings[3])
 
 scales = sticks.generate_scale()
 sorted_sticks = SortSticks.SortSticks(sticks)
+sorted_sticks.speed = settings[2]
 
 game_exit = 0
 
 start = time.time()
 
-sort = Thread(target=sorted_sticks.sort, args=("selection_sort",))
+sort = Thread(target=sorted_sticks.sort, args=(settings[1],))
 sort.start()
-
 
 while not game_exit:
     if sort.is_alive():
@@ -39,7 +41,7 @@ while not game_exit:
     board.blit(status, (0, 0))
     sticks.draw_sticks(scales)
     pg.display.update()
-    clock.tick(24)
+    clock.tick(60)
 
 pg.quit()
-quit()
+exit()
