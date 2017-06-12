@@ -12,10 +12,7 @@ class SortSticks(object):
 
     @property
     def speed(self):
-        if 0 < self._speed < 10:
             return self._speed
-        else:
-            return 1
 
     @property
     def length_list(self) -> list:
@@ -27,7 +24,7 @@ class SortSticks(object):
 
     @speed.setter
     def speed(self, value):
-        if 0 < value < 10:
+        if 0 < value <= 10:
             self._speed = value
         else:
             self._speed = 5
@@ -39,7 +36,7 @@ class SortSticks(object):
         stick_1 = self.sticks.find_stick(self.length_list[index_1], in_from)
         stick_2 = self.sticks.find_stick(self.length_list[index_2], in_from)
         self.sticks_on((stick_1, stick_2))
-        time.sleep(1/(self.speed*2.3))  # Hız kontrolü buradan yapılabilir !
+        time.sleep(1/(self.speed*1.8))  # Hız kontrolü buradan yapılabilir !
         self.sticks.swap_stick_locations(stick_1, stick_2)
         self.sticks_off((stick_1, stick_2))
 
