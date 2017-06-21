@@ -24,7 +24,7 @@ class SortSticks(object):
 
     @speed.setter
     def speed(self, value):
-        if 0 < value <= 10:
+        if 0 < value <= 20:
             self._speed = value
         else:
             self._speed = 5
@@ -59,7 +59,8 @@ class SortSticks(object):
 
     def sort(self, algorithm: str = "test"):
         algorithms = {"test": self.test_sort,
-                      "selection_sort": self.selection_sort}
+                      "selection_sort": self.selection_sort,
+                      "bubble_sort": self.bubble_sort}
 
         algorithms[algorithm]()
 
@@ -93,6 +94,20 @@ class SortSticks(object):
                 i += 1
 
         sort()
+
+    def bubble_sort(self):
+        len_list = len(self.length_list)
+
+        i = 0
+        while i < len_list:
+            j = len_list - 1
+
+            while j > 0:
+                if self.length_list[j-1] > self.length_list[j]:
+                    self.swap(j-1, j, j-1)
+                j -= 1
+
+            i += 1
 
 
 if __name__ == "__main__":

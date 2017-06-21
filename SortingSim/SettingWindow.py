@@ -45,7 +45,8 @@ class SettingWindow(tk.Tk):
 
             # Translating from user to SortSticks.sort() method.
             alg_dict = {"Test Algorithm": "test",
-                        "Selection Sort": "selection_sort"}
+                        "Selection Sort": "selection_sort",
+                        "Bubble Sort": "bubble_sort"}
 
             # Append settings
             self.setting_list = []  # Guaranteed list is empty
@@ -87,7 +88,7 @@ class SettingWindow(tk.Tk):
         # Widget attributes
         number_of_sticks.delete(0, tk.END)  # Clear
         number_of_sticks.insert(tk.INSERT, 100)
-        algorithms['values'] = ("Test Algorithm", "Selection Sort")  # Review: Bu liste daha duzenli tutulabilir mi?
+        algorithms['values'] = ("Test Algorithm", "Selection Sort", "Bubble Sort")  # Review: Bu liste daha duzenli tutulabilir mi?
         algorithms.current(0)
         speed.delete(0, tk.END)   # Clear
         speed.insert(tk.INSERT, 5)
